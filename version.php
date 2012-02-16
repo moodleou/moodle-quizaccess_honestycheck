@@ -17,10 +17,9 @@
 /**
  * Version information for the quizaccess_honestycheck plugin.
  *
- * @package    quizaccess
- * @subpackage honestycheck
- * @copyright  2011 The Open University
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   quizaccess_honestycheck
+ * @copyright 2011 The Open University
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
@@ -28,5 +27,8 @@ defined('MOODLE_INTERNAL') || die();
 
 
 $plugin->version   = 2011092300;
-$plugin->requires  = 2011091600;
+$plugin->requires  = 2011120500;
+$plugin->cron      = 0;
 $plugin->component = 'quizaccess_honestycheck';
+$plugin->maturity  = MATURITY_STABLE;
+$plugin->release   = '1.0';

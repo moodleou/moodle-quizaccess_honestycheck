@@ -17,10 +17,9 @@
 /**
  * Strings for the quizaccess_honestycheck plugin.
  *
- * @package    quizaccess
- * @subpackage honestycheck
- * @copyright  2011 The Open University
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   quizaccess_honestycheck
+ * @copyright 2011 The Open University
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
