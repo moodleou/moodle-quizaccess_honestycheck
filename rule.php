@@ -84,7 +84,7 @@ class quizaccess_honestycheck extends quiz_access_rule_base {
     public static function save_settings($quiz) {
         global $DB;
         if (empty($quiz->honestycheckrequired)) {
-            $DB->delete_records('quizaccess_honestycheck', 'quizid', $quiz->id);
+            $DB->delete_records('quizaccess_honestycheck', array('quizid' => $quiz->id));
         } else {
             if (!$DB->record_exists('quizaccess_honestycheck', array('quizid' => $quiz->id))) {
                 $record = new stdClass();
