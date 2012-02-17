@@ -27,11 +27,11 @@ defined('MOODLE_INTERNAL') || die();
 
 
 $string['honestycheckheader'] = 'Please read the following message';
-$string['honestychecklabel'] = 'I have read and acknowledge the above statement.';
+$string['honestychecklabel'] = 'I have read and agree to the above statement.';
 $string['honestycheckrequired'] = 'Students cognisance of plagiarism policy';
-$string['honestycheckrequired_help'] = 'If you enable this options, students will not be able to start an attempt until the I ticked a check-box confirming they are aware of the university\'s policy on academic honesty.';
+$string['honestycheckrequired_help'] = 'If you enable this option, students will not be able to start an attempt until they have ticked a check-box confirming that they are aware of the policy on academic honesty.';
 $string['honestycheckrequiredoption'] = 'must be acknowledged before starting an attempt';
-$string['honestycheckstatement'] = 'I understand that it is important that the attempt I am about to make is all my own work. I undersand what constitutes plagiarism or cheating, and I will not undertake such activities.';
+$string['honestycheckstatement'] = 'I understand that it is important that the attempt I am about to make is all my own work. I understand what constitutes plagiarism or cheating, and I will not undertake such activities.';
 $string['notrequired'] = 'not required';
 $string['pluginname'] = 'Acknowledge plagiarism statement access rule';
 $string['youmustagree'] = 'You must agree to this statement before you start the quiz.';
