@@ -25,18 +25,17 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+global $CFG;
 require_once($CFG->dirroot . '/mod/quiz/accessrule/honestycheck/rule.php');
 
 
 /**
  * Unit tests for the quizaccess_honestycheck plugin.
  *
- * @copyright  2008 The Open University
+ * @copyright  2011 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class quizaccess_honestycheck_test extends UnitTestCase {
-    public static $includecoverage = array('mod/quiz/accessrule/honestycheck/rule.php');
-
+class quizaccess_honestycheck_test extends basic_testcase {
     public function test_honestycheck_rule() {
         $quiz = new stdClass();
         $quiz->attempts = 3;
@@ -44,7 +43,20 @@ class quizaccess_honestycheck_test extends UnitTestCase {
         $cm = new stdClass();
         $cm->id = 0;
         $quizobj = new quiz($quiz, $cm, null);
-        $rule = new quizaccess_honestycheck($quizobj, 0);
-        $attempt = new stdClass();
+        $rule = quizaccess_honestycheck::make($quizobj, 0, false);
+        $this->assertNull($rule);
+
+        $quiz->honestycheckrequired = true;
+        $rule = quizaccess_honestycheck::make($quizobj, 0, false);
+        $this->assertInstanceOf('quizaccess_honestycheck', $rule);
+        $this->assertTrue($rule->is_preflight_check_required(null));
+
+        $this->assertFalse($rule->is_preflight_check_required(1));
+
+        $errors = $rule->validate_preflight_check(array(), null, array(), 1);
+        $this->assertArrayHasKey('honestycheck', $errors);
+
+        $errors = $rule->validate_preflight_check(array('honestycheck' => 1), null, array(), 1);
+        $this->assertEmpty($errors);
     }
 }
