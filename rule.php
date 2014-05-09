@@ -94,6 +94,11 @@ class quizaccess_honestycheck extends quiz_access_rule_base {
         }
     }
 
+    public static function delete_settings($quiz) {
+        global $DB;
+        $DB->delete_records('quizaccess_honestycheck', array('quizid' => $quiz->id));
+    }
+
     public static function get_settings_sql($quizid) {
         return array(
             'honestycheckrequired',
