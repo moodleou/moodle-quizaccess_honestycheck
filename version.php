@@ -26,9 +26,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 
-$plugin->version   = 2013020600;
+$plugin->version   = 2014051300;
 $plugin->requires  = 2011120500;
 $plugin->cron      = 0;
 $plugin->component = 'quizaccess_honestycheck';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v1.1 for Moodle 2.2+';
+$plugin->release   = 'v1.2 for Moodle 2.2+';
