@@ -42,16 +42,16 @@ class backup_quizaccess_honestycheck_subplugin extends backup_mod_quiz_access_su
 
         // Create XML elements.
         $subplugin = $this->get_subplugin_element();
-        $subplugin_wrapper = new backup_nested_element($this->get_recommended_name());
-        $subplugin_table_settings = new backup_nested_element('quizaccess_honestycheck',
+        $subpluginwrapper = new backup_nested_element($this->get_recommended_name());
+        $subplugintablesettings = new backup_nested_element('quizaccess_honestycheck',
                 null, array('honestycheckrequired'));
 
         // Connect XML elements into the tree.
-        $subplugin->add_child($subplugin_wrapper);
-        $subplugin_wrapper->add_child($subplugin_table_settings);
+        $subplugin->add_child($subpluginwrapper);
+        $subpluginwrapper->add_child($subplugintablesettings);
 
         // Set source to populate the data.
-        $subplugin_table_settings->set_source_table('quizaccess_honestycheck',
+        $subplugintablesettings->set_source_table('quizaccess_honestycheck',
                 array('quizid' => backup::VAR_ACTIVITYID));
 
         return $subplugin;
