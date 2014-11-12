@@ -22,13 +22,11 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 defined('MOODLE_INTERNAL') || die();
 
-
-$plugin->version   = 2014051300;
-$plugin->requires  = 2011120500;
+$plugin->version   = 2014111200;
+$plugin->requires  = 2013101800;
 $plugin->cron      = 0;
 $plugin->component = 'quizaccess_honestycheck';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v1.2 for Moodle 2.2+';
+$plugin->release   = 'v1.3 for Moodle 2.6+';
