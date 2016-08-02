@@ -59,12 +59,12 @@ Feature: Test all the basic functionality of this quiz access rule
     And I should see "I understand that it is important that the attempt I am about to make is all my own work."
 
     # Continuing without ticking is blocked.
-    When I press "Continue"
+    And I click on "Start attempt" "button" in the "Start attempt" "dialogue"
     Then I should see "You must agree to this statement before you start the quiz."
 
     # Continuing with ticking is OK.
     When I set the field "I have read and agree to the above statement" to "1"
-    And I press "Continue"
+    And I press "Start attempt"
     Then I should see "Question 1"
 
     # Test that backup and restore keeps the setting.
