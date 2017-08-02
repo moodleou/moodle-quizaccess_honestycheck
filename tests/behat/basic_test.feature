@@ -1,5 +1,5 @@
 @ou @ou_vle @quizaccess @quizaccess_honestycheck
-Feature: Test all the basic functionality of this quiz access rule
+Feature: Test all the basic functionality of honesty check quiz access rule
   In order to stop students cheating
   As an teacher
   I need to make them promise to be good before starting a quiz.
