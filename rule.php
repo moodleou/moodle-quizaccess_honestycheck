@@ -46,7 +46,7 @@ class quizaccess_honestycheck extends quiz_access_rule_base {
         $mform->addElement('header', 'honestycheckheader',
                 get_string('honestycheckheader', 'quizaccess_honestycheck'));
         $mform->addElement('static', 'honestycheckmessage', '',
-                get_string('honestycheckstatement', 'quizaccess_honestycheck'));
+                get_config('quizaccess_honestycheck', 'honestycheckstatement'));
         $mform->addElement('checkbox', 'honestycheck', '',
                 get_string('honestychecklabel', 'quizaccess_honestycheck'));
     }

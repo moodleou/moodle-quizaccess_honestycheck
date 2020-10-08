@@ -15,20 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information for the quizaccess_honestycheck plugin.
+ * Global configuration settings for the quizaccess_honestycheck plugin.
  *
- * @package   quizaccess_honestycheck
- * @copyright 2011 The Open University
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    quizaccess_honestycheck
+ * @author     Dmitrii Metelkin <dmitriim@catalyst-au.net>
+ * @copyright  2020 Catalyst IT
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2018080901;
-$plugin->requires  = 2017111300;
-$plugin->cron      = 0;
-$plugin->component = 'quizaccess_honestycheck';
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v1.5 for Moodle 3.4+';
+global $ADMIN;
 
-$plugin->outestssufficient = true;
+if ($hassiteconfig) {
+
+    $settings->add(new admin_setting_confightmleditor('quizaccess_honestycheck/honestycheckstatement',
+        get_string('setting:honestycheckstatement', 'quizaccess_honestycheck'),
+        get_string('setting:honestycheckstatement_desc', 'quizaccess_honestycheck'),
+        get_string('honestycheckstatement', 'quizaccess_honestycheck')));
+}

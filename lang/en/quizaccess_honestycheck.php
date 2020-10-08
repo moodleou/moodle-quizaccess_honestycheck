@@ -34,5 +34,7 @@ $string['honestycheckrequiredoption'] = 'must be acknowledged before starting an
 $string['honestycheckstatement'] = 'I understand that it is important that the attempt I am about to make is all my own work. I understand what constitutes plagiarism or cheating, and I will not undertake such activities.';
 $string['notrequired'] = 'not required';
 $string['pluginname'] = 'Acknowledge plagiarism statement access rule';
+$string['setting:honestycheckstatement'] = 'Statement text';
+$string['setting:honestycheckstatement_desc'] = 'This statement will be displayed for students before they will be able to start an attempt.';
 $string['youmustagree'] = 'You must agree to this statement before you start the quiz.';
 $string['privacy:metadata'] = 'The Acknowledge plagiarism statement access rule plugin does not store any personal data.';

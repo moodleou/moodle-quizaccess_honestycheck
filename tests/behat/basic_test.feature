@@ -16,6 +16,12 @@ Feature: Test all the basic functionality of honesty check quiz access rule
       | user    | course | role           |
       | teacher | C1     | editingteacher |
       | student | C1     | student        |
+    And I log in as "admin"
+    And I navigate to "Plugins > Acknowledge plagiarism statement access rule" in site administration
+    And I set the following fields to these values:
+      | Statement text | I understand that it is important that the attempt I am about to make is all my own work! |
+    And I press "Save changes"
+    And I log out
 
   @javascript
   Scenario: Require students to agree, then check the they have to.
@@ -56,7 +62,7 @@ Feature: Test all the basic functionality of honesty check quiz access rule
     And I follow "Quiz with honesty check"
     And I press "Attempt quiz now"
     Then I should see "Please read the following message"
-    And I should see "I understand that it is important that the attempt I am about to make is all my own work."
+    And I should see "I understand that it is important that the attempt I am about to make is all my own work!"
 
     # Continuing without ticking is blocked.
     And I click on "Start attempt" "button" in the "Start attempt" "dialogue"
