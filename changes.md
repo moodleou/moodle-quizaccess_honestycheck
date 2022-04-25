@@ -1,5 +1,9 @@
 # Change log for the The Honesty check quiz access rule
 
+## Changes in 1.6
+
+* This version works with Moodle 4.0.
+* Switch from Travis to Github actions.
 
 ## Changes in 1.5
 

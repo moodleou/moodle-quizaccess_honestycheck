@@ -21,7 +21,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace quizaccess_honestycheck\privacy;
-defined('MOODLE_INTERNAL') || die();
 /**
  * Privacy Subsystem for quizaccess_honestycheck implementing null_provider.
  *
