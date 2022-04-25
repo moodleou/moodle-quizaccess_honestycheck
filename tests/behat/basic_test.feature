@@ -1,4 +1,4 @@
-@ou @ou_vle @quizaccess @quizaccess_honestycheck
+@ou @ou_vle @quizaccess @quizaccess_honestycheck @javascript
 Feature: Test all the basic functionality of honesty check quiz access rule
   In order to stop students cheating
   As an teacher
@@ -20,8 +20,7 @@ Feature: Test all the basic functionality of honesty check quiz access rule
   @javascript
   Scenario: Require students to agree, then check the they have to.
     # Add a quiz to a course without the condition, and verify that they can start it as normal.
-    Given I log in as "teacher"
-    And I am on "Course 1" course homepage
+    Given I am on the "Course 1" "Course" page logged in as "teacher"
     And I turn editing mode on
     And I add a "Quiz" to section "1" and I fill the form with:
       | Name        | Quiz no honesty check                                    |
@@ -31,30 +30,25 @@ Feature: Test all the basic functionality of honesty check quiz access rule
       | Question text                      | Is this the second question? |
       | Correct answer                     | False                        |
     And I log out
-    And I log in as "student"
-    And I am on "Course 1" course homepage
-    And I follow "Quiz no honesty check"
-    And I press "Attempt quiz now"
+    And I am on the "Quiz no honesty check" "mod_quiz > View" page logged in as "student"
+    When I press "Attempt quiz"
     Then I should see "Question 1"
 
     # Add a quiz to a course with the condition, and verify that the student is challenged.
     When I log out
-    And I log in as "teacher"
-    And I am on "Course 1" course homepage
+    Given I am on the "Course 1" "Course" page logged in as "teacher"
     And I turn editing mode on
     And I add a "Quiz" to section "1" and I fill the form with:
-      | Name                                     | Quiz with honesty check                           |
-      | Description                              | This quiz requires students to agree not to cheat |
+      | Name        | Quiz with honesty check                          |
+      | Description | This quiz require students to agree not to cheat |
       | Students cognisance of plagiarism policy | must be acknowledged before starting an attempt   |
     And I add a "True/False" question to the "Quiz with honesty check" quiz with:
       | Question name                      | First question              |
       | Question text                      | Is this the first question? |
       | Correct answer                     | True                        |
     And I log out
-    And I log in as "student"
-    And I am on "Course 1" course homepage
-    And I follow "Quiz with honesty check"
-    And I press "Attempt quiz now"
+    And I am on the "Quiz with honesty check" "mod_quiz > View" page logged in as "student"
+    When I press "Attempt quiz"
     Then I should see "Please read the following message"
     And I should see "I understand that it is important that the attempt I am about to make is all my own work."
 
@@ -69,11 +63,12 @@ Feature: Test all the basic functionality of honesty check quiz access rule
 
     # Test that backup and restore keeps the setting.
     When I log out
-    And I log in as "teacher"
-    And I am on "Course 1" course homepage
+    Given I am on the "Course 1" "Course" page logged in as "teacher"
     And I turn editing mode on
     And I duplicate "Quiz with honesty check" activity editing the new copy with:
       | Name | Duplicated quiz with honesty check |
-    And I follow "Duplicated quiz with honesty check"
-    And I press "Preview quiz now"
+   # And I follow "Duplicated quiz with honesty check"
+    And I log out
+    And I am on the "Duplicated quiz with honesty check" "mod_quiz > View" page logged in as "teacher"
+    And I press "Preview quiz"
     Then I should see "Please read the following message"
