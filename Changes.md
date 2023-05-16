@@ -1,5 +1,9 @@
 # Change log for the The Honesty check quiz access rule
 
+## Changes in 1.7
+
+* This version works with Moodle 4.1 and 4.2 (as well as earlier versions).
+
 ## Changes in 1.6
 
 * This version works with Moodle 4.0.
