@@ -14,35 +14,33 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Unit tests for the quizaccess_honestycheck plugin.
- *
- * @package   quizaccess_honestycheck
- * @copyright 2011 The Open University
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+namespace quizaccess_honestycheck;
 
+use basic_testcase;
+use quizaccess_honestycheck;
+use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/quiz/accessrule/honestycheck/rule.php');
 
-
 /**
  * Unit tests for the quizaccess_honestycheck plugin.
  *
- * @copyright  2011 The Open University
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   quizaccess_honestycheck
+ * @copyright 2011 The Open University
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @covers    \quizaccess_honestycheck
  */
-class quizaccess_honestycheck_test extends basic_testcase {
+class rule_test extends basic_testcase {
     public function test_honestycheck_rule() {
         $quiz = new stdClass();
         $quiz->attempts = 3;
         $quiz->questions = '';
         $cm = new stdClass();
         $cm->id = 0;
-        $quizobj = new quiz($quiz, $cm, null);
+        $quizobj = new \quizaccess_honestycheck_quiz_settings_class_alias($quiz, $cm, null);
         $rule = quizaccess_honestycheck::make($quizobj, 0, false);
         $this->assertNull($rule);
 
