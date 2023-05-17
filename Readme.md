@@ -14,7 +14,7 @@ in the normal way.
 
 ### Install using git
 
-Or you can install using git. Type this commands in the root of your Moodle install
+Or you can install using git. Type these commands in the root of your Moodle install
 
     git clone https://github.com/moodleou/moodle-quizaccess_honestycheck.git mod/quiz/accessrule/honestycheck
     echo '/mod/quiz/accessrule/honestycheck/' >> .git/info/exclude
@@ -23,5 +23,5 @@ Then run the moodle update process Site administration > Notifications
 
 ### Changing the text of the message
 
-This statement students must agree to is a Moodle language string, so it can be changes using the
+This statement students must agree to is a Moodle language string, so it can be changed using the
 standard [Language customisation](https://docs.moodle.org/en/Language_customisation) process.
