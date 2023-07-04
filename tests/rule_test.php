@@ -40,7 +40,7 @@ final class rule_test extends basic_testcase {
         $quiz->questions = '';
         $cm = new stdClass();
         $cm->id = 0;
-        $quizobj = new \quizaccess_honestycheck_quiz_settings_class_alias($quiz, $cm, null);
+        $quizobj = new \mod_quiz\quiz_settings($quiz, $cm, null);
         $rule = quizaccess_honestycheck::make($quizobj, 0, false);
         $this->assertNull($rule);
 

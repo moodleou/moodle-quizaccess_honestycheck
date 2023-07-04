@@ -24,19 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-// This work-around is required until Moodle 4.2 is the lowest version we support.
-if (class_exists('\mod_quiz\local\access_rule_base')) {
-    class_alias('\mod_quiz\local\access_rule_base', '\quizaccess_honestycheck_parent_class_alias');
-    class_alias('\mod_quiz\form\preflight_check_form', '\quizaccess_honestycheck_preflight_form_alias');
-    class_alias('\mod_quiz\quiz_settings', '\quizaccess_honestycheck_quiz_settings_class_alias');
-} else {
-    require_once($CFG->dirroot . '/mod/quiz/accessrule/accessrulebase.php');
-    class_alias('\quiz_access_rule_base', '\quizaccess_honestycheck_parent_class_alias');
-    class_alias('\mod_quiz_preflight_check_form', '\quizaccess_honestycheck_preflight_form_alias');
-    class_alias('\quiz', '\quizaccess_honestycheck_quiz_settings_class_alias');
-}
-
-
+use mod_quiz\form\preflight_check_form;
+use mod_quiz\local\access_rule_base;
+use mod_quiz\quiz_settings;
 
 /**
  * A rule requiring the student to promise not to cheat.
@@ -44,7 +34,7 @@ if (class_exists('\mod_quiz\local\access_rule_base')) {
  * @copyright  2011 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class quizaccess_honestycheck extends quizaccess_honestycheck_parent_class_alias {
+class quizaccess_honestycheck extends access_rule_base {
 
     /**
      * Whether the honesty check is required.
@@ -58,11 +48,11 @@ class quizaccess_honestycheck extends quizaccess_honestycheck_parent_class_alias
     /**
      * Add the preflight check form fields.
      *
-     * @param quizaccess_honestycheck_preflight_form_alias $quizform The quiz form.
+     * @param preflight_check_form $quizform The quiz form.
      * @param MoodleQuickForm $mform The Moodle form object.
      * @param int $attemptid The attempt id.
      */
-    public function add_preflight_check_form_fields(quizaccess_honestycheck_preflight_form_alias $quizform,
+    public function add_preflight_check_form_fields(preflight_check_form $quizform,
             MoodleQuickForm $mform, $attemptid) {
 
         $mform->addElement('header', 'honestycheckheader',
@@ -92,11 +82,11 @@ class quizaccess_honestycheck extends quizaccess_honestycheck_parent_class_alias
     /**
      * Make a new instance of the honestycheck.
      *
-     * @param quizaccess_honestycheck_quiz_settings_class_alias $quizobj The quiz object.
+     * @param quiz_settings $quizobj The quiz object.
      * @param int $timenow The current time.
      * @param bool $canignoretimelimits Whether the user can ignore time limits.
      */
-    public static function make(quizaccess_honestycheck_quiz_settings_class_alias $quizobj, $timenow, $canignoretimelimits) {
+    public static function make(quiz_settings $quizobj, $timenow, $canignoretimelimits) {
 
         if (empty($quizobj->get_quiz()->honestycheckrequired)) {
             return null;
