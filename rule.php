@@ -82,25 +82,25 @@ class quizaccess_honestycheck extends quizaccess_honestycheck_parent_class_alias
             mod_quiz_mod_form $quizform, MoodleQuickForm $mform) {
         $mform->addElement('select', 'honestycheckrequired',
                 get_string('honestycheckrequired', 'quizaccess_honestycheck'),
-                array(
+                [
                     0 => get_string('notrequired', 'quizaccess_honestycheck'),
                     1 => get_string('honestycheckrequiredoption', 'quizaccess_honestycheck'),
-                ));
-        $mform->addHelpButton('honestycheckrequired',
-                'honestycheckrequired', 'quizaccess_honestycheck');
+                ]);
+        $mform->setDefault('honestycheckrequired', get_config('quizaccess_honestycheck', 'honestycheckrequired'));
+        $mform->addHelpButton('honestycheckrequired', 'honestycheckrequired', 'quizaccess_honestycheck');
     }
 
     public static function save_settings($quiz) {
         global $DB;
-        if (empty($quiz->honestycheckrequired)) {
-            $DB->delete_records('quizaccess_honestycheck', array('quizid' => $quiz->id));
+        $record = [
+            "quizid" => $quiz->id,
+            "honestycheckrequired" => (empty($quiz->honestycheckrequired)) ? 0 : 1,
+        ];
+        if ($DB->record_exists('quizaccess_honestycheck', array('quizid' => $quiz->id))) {
+            $sql = 'UPDATE {quizaccess_honestycheck} SET honestycheckrequired = :honestycheckrequired WHERE quizid = :quizid';
+            $DB->execute($sql, $record);
         } else {
-            if (!$DB->record_exists('quizaccess_honestycheck', array('quizid' => $quiz->id))) {
-                $record = new stdClass();
-                $record->quizid = $quiz->id;
-                $record->honestycheckrequired = 1;
-                $DB->insert_record('quizaccess_honestycheck', $record);
-            }
+            $DB->insert_record('quizaccess_honestycheck', $record);
         }
     }
 
