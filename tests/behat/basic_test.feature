@@ -16,19 +16,25 @@ Feature: Test all the basic functionality of honesty check quiz access rule
       | user    | course | role           |
       | teacher | C1     | editingteacher |
       | student | C1     | student        |
+    And the following "question categories" exist:
+      | contextlevel | reference | name                |
+      | Course       | C1        | Questions Category 1|
 
   @javascript
   Scenario: Require students to agree, then check the they have to.
     # Add a quiz to a course without the condition, and verify that they can start it as normal.
     Given I am on the "Course 1" "Course" page logged in as "teacher"
     And I turn editing mode on
-    And I add a "Quiz" to section "1" and I fill the form with:
-      | Name        | Quiz no honesty check                                    |
-      | Description | This quiz does not require students to agree to anything |
-    And I add a "True/False" question to the "Quiz no honesty check" quiz with:
-      | Question name                      | First question               |
-      | Question text                      | Is this the second question? |
-      | Correct answer                     | False                        |
+    And the following "activities" exist:
+      | activity | name                  | intro                                                    | course | section |
+      | quiz     | Quiz no honesty check | This quiz does not require students to agree to anything | C1     | 1       |
+    And the following "questions" exist:
+      | questioncategory     | qtype     | name           | questiontext                 | Correct answer |
+      | Questions Category 1 | truefalse | First question | Is this the second question? | False          |
+    And quiz "Quiz no honesty check" contains the following questions:
+      | question       | page |
+      | First question | 1    |
+
     And I log out
     And I am on the "Quiz no honesty check" "mod_quiz > View" page logged in as "student"
     When I press "Attempt quiz"
@@ -38,14 +44,16 @@ Feature: Test all the basic functionality of honesty check quiz access rule
     When I log out
     Given I am on the "Course 1" "Course" page logged in as "teacher"
     And I turn editing mode on
-    And I add a "Quiz" to section "1" and I fill the form with:
-      | Name        | Quiz with honesty check                          |
-      | Description | This quiz require students to agree not to cheat |
-      | Students cognisance of plagiarism policy | must be acknowledged before starting an attempt   |
-    And I add a "True/False" question to the "Quiz with honesty check" quiz with:
-      | Question name                      | First question              |
-      | Question text                      | Is this the first question? |
-      | Correct answer                     | True                        |
+    And I add a quiz activity to course "C1" section "1" and I fill the form with:
+      | Name                                     | Quiz with honesty check                          |
+      | Description                              | This quiz require students to agree not to cheat |
+      | Students cognisance of plagiarism policy | must be acknowledged before starting an attempt  |
+    And the following "questions" exist:
+      | questioncategory     | qtype     | name            | questiontext                 | Correct answer |
+      | Questions Category 1 | truefalse | Second question | Is this the second question? | True           |
+    And quiz "Quiz with honesty check" contains the following questions:
+      | question        | page |
+      | Second question | 1    |
     And I log out
     And I am on the "Quiz with honesty check" "mod_quiz > View" page logged in as "student"
     When I press "Attempt quiz"
