@@ -24,11 +24,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2023051600;
-$plugin->requires  = 2020061500;
+$plugin->version   = 2025070900;
+$plugin->requires  = 2024042200;
 $plugin->cron      = 0;
 $plugin->component = 'quizaccess_honestycheck';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v1.7 for Moodle 3.11+';
+$plugin->release   = 'v1.8 for Moodle 4.4+';
 
 $plugin->outestssufficient = true;
