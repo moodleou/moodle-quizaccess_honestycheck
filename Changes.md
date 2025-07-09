@@ -1,5 +1,12 @@
 # Change log for the The Honesty check quiz access rule
 
+## Changes in 1.8
+
+* This version works with Moodle 5.0 and 5.1 (as well as earlier versions).
+* Update the CI to support Moodle 5.0 (PHP 8.3), and update the branch to support branch MOODLE_405_STABLE, and MOODLE_500_STABLE.
+* Cherry-picked commits since May 2023 till now:
+  * Fix behat deprecated step failures for M4.4.
+
 ## Changes in 1.7
 
 * This version works with Moodle 4.1 and 4.2 (as well as earlier versions).
