@@ -46,10 +46,22 @@ if (class_exists('\mod_quiz\local\access_rule_base')) {
  */
 class quizaccess_honestycheck extends quizaccess_honestycheck_parent_class_alias {
 
+    /**
+     * Whether the honesty check is required.
+     *
+     * @param int $attemptid The attempt id.
+     */
     public function is_preflight_check_required($attemptid) {
         return empty($attemptid);
     }
 
+    /**
+     * Add the preflight check form fields.
+     *
+     * @param quizaccess_honestycheck_preflight_form_alias $quizform The quiz form.
+     * @param MoodleQuickForm $mform The Moodle form object.
+     * @param int $attemptid The attempt id.
+     */
     public function add_preflight_check_form_fields(quizaccess_honestycheck_preflight_form_alias $quizform,
             MoodleQuickForm $mform, $attemptid) {
 
@@ -61,6 +73,14 @@ class quizaccess_honestycheck extends quizaccess_honestycheck_parent_class_alias
                 get_string('honestychecklabel', 'quizaccess_honestycheck'));
     }
 
+    /**
+     * Validate the preflight check.
+     *
+     * @param array $data The submitted form data.
+     * @param array $files The submitted files.
+     * @param array $errors The errors.
+     * @param int $attemptid The attempt ID.
+     */
     public function validate_preflight_check($data, $files, $errors, $attemptid) {
         if (empty($data['honestycheck'])) {
             $errors['honestycheck'] = get_string('youmustagree', 'quizaccess_honestycheck');
@@ -69,6 +89,13 @@ class quizaccess_honestycheck extends quizaccess_honestycheck_parent_class_alias
         return $errors;
     }
 
+    /**
+     * Make a new instance of the honestycheck.
+     *
+     * @param quizaccess_honestycheck_quiz_settings_class_alias $quizobj The quiz object.
+     * @param int $timenow The current time.
+     * @param bool $canignoretimelimits Whether the user can ignore time limits.
+     */
     public static function make(quizaccess_honestycheck_quiz_settings_class_alias $quizobj, $timenow, $canignoretimelimits) {
 
         if (empty($quizobj->get_quiz()->honestycheckrequired)) {
@@ -78,24 +105,34 @@ class quizaccess_honestycheck extends quizaccess_honestycheck_parent_class_alias
         return new self($quizobj, $timenow);
     }
 
+    /**
+     * Add settings form fields to the quiz settings form.
+     *
+     * @param mod_quiz_mod_form $quizform The quiz form.
+     * @param MoodleQuickForm $mform The Moodle form object.
+     */
     public static function add_settings_form_fields(
             mod_quiz_mod_form $quizform, MoodleQuickForm $mform) {
         $mform->addElement('select', 'honestycheckrequired',
-                get_string('honestycheckrequired', 'quizaccess_honestycheck'),
-                array(
-                    0 => get_string('notrequired', 'quizaccess_honestycheck'),
-                    1 => get_string('honestycheckrequiredoption', 'quizaccess_honestycheck'),
-                ));
+            get_string('honestycheckrequired', 'quizaccess_honestycheck'), [
+                0 => get_string('notrequired', 'quizaccess_honestycheck'),
+                1 => get_string('honestycheckrequiredoption', 'quizaccess_honestycheck'),
+            ]);
         $mform->addHelpButton('honestycheckrequired',
-                'honestycheckrequired', 'quizaccess_honestycheck');
+            'honestycheckrequired', 'quizaccess_honestycheck');
     }
 
+    /**
+     * Save the settings for a quiz.
+     *
+     * @param stdClass $quiz The quiz object.
+     */
     public static function save_settings($quiz) {
         global $DB;
         if (empty($quiz->honestycheckrequired)) {
-            $DB->delete_records('quizaccess_honestycheck', array('quizid' => $quiz->id));
+            $DB->delete_records('quizaccess_honestycheck', ['quizid' => $quiz->id]);
         } else {
-            if (!$DB->record_exists('quizaccess_honestycheck', array('quizid' => $quiz->id))) {
+            if (!$DB->record_exists('quizaccess_honestycheck', ['quizid' => $quiz->id])) {
                 $record = new stdClass();
                 $record->quizid = $quiz->id;
                 $record->honestycheckrequired = 1;
@@ -104,15 +141,26 @@ class quizaccess_honestycheck extends quizaccess_honestycheck_parent_class_alias
         }
     }
 
+    /**
+     * Delete the settings for a quiz.
+     *
+     * @param stdClass $quiz The quiz object.
+     */
     public static function delete_settings($quiz) {
         global $DB;
-        $DB->delete_records('quizaccess_honestycheck', array('quizid' => $quiz->id));
+        $DB->delete_records('quizaccess_honestycheck', ['quizid' => $quiz->id]);
     }
 
+    /**
+     * Get the settings SQL.
+     *
+     * @param int $quizid The quiz id.
+     */
     public static function get_settings_sql($quizid) {
-        return array(
+        return [
             'honestycheckrequired',
             'LEFT JOIN {quizaccess_honestycheck} honestycheck ON honestycheck.quizid = quiz.id',
-            array());
+            [],
+        ];
     }
 }

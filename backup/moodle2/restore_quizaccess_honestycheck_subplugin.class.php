@@ -40,9 +40,10 @@ require_once($CFG->dirroot . '/mod/quiz/backup/moodle2/restore_mod_quiz_access_s
  */
 class restore_quizaccess_honestycheck_subplugin extends restore_mod_quiz_access_subplugin {
 
+    #[\Override]
     protected function define_quiz_subplugin_structure() {
 
-        $paths = array();
+        $paths = [];
 
         $elename = $this->get_namefor('');
         $elepath = $this->get_pathfor('/quizaccess_honestycheck');

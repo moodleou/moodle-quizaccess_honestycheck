@@ -33,8 +33,8 @@ require_once($CFG->dirroot . '/mod/quiz/accessrule/honestycheck/rule.php');
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @covers    \quizaccess_honestycheck
  */
-class rule_test extends basic_testcase {
-    public function test_honestycheck_rule() {
+final class rule_test extends basic_testcase {
+    public function test_honestycheck_rule(): void {
         $quiz = new stdClass();
         $quiz->attempts = 3;
         $quiz->questions = '';
@@ -51,10 +51,10 @@ class rule_test extends basic_testcase {
 
         $this->assertFalse($rule->is_preflight_check_required(1));
 
-        $errors = $rule->validate_preflight_check(array(), null, array(), 1);
+        $errors = $rule->validate_preflight_check([], null, [], 1);
         $this->assertArrayHasKey('honestycheck', $errors);
 
-        $errors = $rule->validate_preflight_check(array('honestycheck' => 1), null, array(), 1);
+        $errors = $rule->validate_preflight_check(['honestycheck' => 1], null, [], 1);
         $this->assertEmpty($errors);
     }
 }
