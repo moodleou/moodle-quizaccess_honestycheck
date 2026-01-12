@@ -39,23 +39,27 @@ require_once($CFG->dirroot . '/mod/quiz/backup/moodle2/backup_mod_quiz_access_su
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class backup_quizaccess_honestycheck_subplugin extends backup_mod_quiz_access_subplugin {
-
     #[\Override]
     protected function define_quiz_subplugin_structure() {
 
         // Create XML elements.
         $subplugin = $this->get_subplugin_element();
         $subpluginwrapper = new backup_nested_element($this->get_recommended_name());
-        $subplugintablesettings = new backup_nested_element('quizaccess_honestycheck',
-            null, ['honestycheckrequired']);
+        $subplugintablesettings = new backup_nested_element(
+            'quizaccess_honestycheck',
+            null,
+            ['honestycheckrequired']
+        );
 
         // Connect XML elements into the tree.
         $subplugin->add_child($subpluginwrapper);
         $subpluginwrapper->add_child($subplugintablesettings);
 
         // Set source to populate the data.
-        $subplugintablesettings->set_source_table('quizaccess_honestycheck',
-            ['quizid' => backup::VAR_ACTIVITYID]);
+        $subplugintablesettings->set_source_table(
+            'quizaccess_honestycheck',
+            ['quizid' => backup::VAR_ACTIVITYID]
+        );
 
         return $subplugin;
     }
