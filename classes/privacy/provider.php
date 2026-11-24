@@ -21,7 +21,9 @@
  * @copyright  2018 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace quizaccess_honestycheck\privacy;
+
 /**
  * Privacy Subsystem for quizaccess_honestycheck implementing null_provider.
  *

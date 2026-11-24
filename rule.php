@@ -22,8 +22,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 use mod_quiz\form\preflight_check_form;
 use mod_quiz\local\access_rule_base;
 use mod_quiz\quiz_settings;
@@ -35,7 +33,6 @@ use mod_quiz\quiz_settings;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class quizaccess_honestycheck extends access_rule_base {
-
     /**
      * Whether the honesty check is required.
      *
@@ -52,15 +49,29 @@ class quizaccess_honestycheck extends access_rule_base {
      * @param MoodleQuickForm $mform The Moodle form object.
      * @param int $attemptid The attempt id.
      */
-    public function add_preflight_check_form_fields(preflight_check_form $quizform,
-            MoodleQuickForm $mform, $attemptid) {
+    public function add_preflight_check_form_fields(
+        preflight_check_form $quizform,
+        MoodleQuickForm $mform,
+        $attemptid
+    ) {
 
-        $mform->addElement('header', 'honestycheckheader',
-                get_string('honestycheckheader', 'quizaccess_honestycheck'));
-        $mform->addElement('static', 'honestycheckmessage', '',
-                get_string('honestycheckstatement', 'quizaccess_honestycheck'));
-        $mform->addElement('checkbox', 'honestycheck', '',
-                get_string('honestychecklabel', 'quizaccess_honestycheck'));
+        $mform->addElement(
+            'header',
+            'honestycheckheader',
+            get_string('honestycheckheader', 'quizaccess_honestycheck')
+        );
+        $mform->addElement(
+            'static',
+            'honestycheckmessage',
+            '',
+            get_string('honestycheckstatement', 'quizaccess_honestycheck')
+        );
+        $mform->addElement(
+            'checkbox',
+            'honestycheck',
+            '',
+            get_string('honestychecklabel', 'quizaccess_honestycheck')
+        );
     }
 
     /**
@@ -102,14 +113,23 @@ class quizaccess_honestycheck extends access_rule_base {
      * @param MoodleQuickForm $mform The Moodle form object.
      */
     public static function add_settings_form_fields(
-            mod_quiz_mod_form $quizform, MoodleQuickForm $mform) {
-        $mform->addElement('select', 'honestycheckrequired',
-            get_string('honestycheckrequired', 'quizaccess_honestycheck'), [
+        mod_quiz_mod_form $quizform,
+        MoodleQuickForm $mform
+    ) {
+        $mform->addElement(
+            'select',
+            'honestycheckrequired',
+            get_string('honestycheckrequired', 'quizaccess_honestycheck'),
+            [
                 0 => get_string('notrequired', 'quizaccess_honestycheck'),
                 1 => get_string('honestycheckrequiredoption', 'quizaccess_honestycheck'),
-            ]);
-        $mform->addHelpButton('honestycheckrequired',
-            'honestycheckrequired', 'quizaccess_honestycheck');
+            ]
+        );
+        $mform->addHelpButton(
+            'honestycheckrequired',
+            'honestycheckrequired',
+            'quizaccess_honestycheck'
+        );
     }
 
     /**
