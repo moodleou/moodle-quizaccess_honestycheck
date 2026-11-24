@@ -1,5 +1,11 @@
 # Change log for the The Honesty check quiz access rule
 
+## Changes in 1.9
+
+* This version is compatible with Moodle 5.3 and earlier versions (back to 4.4).
+* Removed the pre-4.2 compatibility class aliases and the require of
+  accessrulebase.php, which was removed from core in Moodle 5.1.
+
 ## Changes in 1.8
 
 * This version is compatible with Moodle 5.0 and earlier versions.
